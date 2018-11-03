@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+{% csrf_token %}
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>{% block title %}{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" type="text/css" href="{% static 'style/base.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'style/bootstrap.min.css' %}">
+      <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+      <!--[if lt IE 9]>
+        <script src="{{ STATIC_URL }}js/html5shiv.min.js"></script>
+        <script src="{{ STATIC_URL }}js/respond.min.js"></script>
+      <![endif]-->
+    </head>
+    <body>
+      <img id='background' src="{% static 'images/sparkle-background.gif' %}">
+        <!-- Navigation -->
+    <nav class="navbar navbar-default" role="navigation">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-title" href="/">Django_James</a>
+      </div>
+    
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav">
+          <li class="things-dropdown">
+          <a data-target="#" href="#" class="things-dropdown-toggle" data-toggle="dropdown" style="color: papayawhip;">
+                  Things<b class="caret"></b>
+              </a>
+          <ul class="dropdown-menu">
+            <li class="sub-page"><a href="{% url 'photologue:pl-gallery-archive' %}">Potatoes</a></li>
+            <li class="sub-page"><a href="{% url 'photologue:gallery-list' %}">Monkies</a></li>
+          </ul>
+        </li>
+          <li class="photos-dropdown">
+          <a data-target="#" href="" class="dropdown-toggle" data-toggle="dropdown" style="color: papayawhip;">
+                  Stuff<b class="caret"></b>
+              </a>
+          <ul class="dropdown-menu">
+            <li class="sub-page"><a href="{% url 'photologue:pl-photo-archive' %}">Lint</a></li>
+            {% if user.is_authenticated or is_logged_in %}
+            <li class="sub-page"><a href="{% url 'profile' %}">Discord Profile</a></li>
+            {% else %}
+            <li class="sub-page"><a href="{% url 'discord_bind_index' %}">Login in to Discord</a></li>
+            {% endif %}
+          </ul>
+        </li>
+         <li class="login-dropdown">
+          {% if user.is_authenticated or is_logged_in %}
+            <a href="/accounts/logout/" class="dropdown-toggle" style="color: papayawhip;">Logout</a>
+          {% else %}
+            <a href="/accounts/login/" class="dropdown-toggle" style="color: papayawhip;">Login</a>
+          {% endif %}
+         </li>
+        <li id="admin-dropdown">
+          <a data-target="#" href="#" class="things-dropdown-toggle" data-toggle="dropdown" style="color: papayawhip;">
+                  Admin<b class="caret"></b>
+              </a>
+          <ul class="dropdown-menu">
+            {% if user.is_authenticated %}
+              <li><a href="{% url 'logout' %}">Logout</a></li>
+            {% endif %}
+            {% if not user.is_authenticated %}
+              <li><a href="{% url 'django_registration_register' %}">Register</a></li>
+              <li><a href="/admin/">Admin</a></li>
+            {% endif %}
+
+            {% if user.is_superuser %}
+              <li><a href="{% url "admin:index" %}">Admin Console</a></li>
+            {% endif %}
+
+            <li class="sub-page"><a href="{% url 'admin:login' %}">Login</a></li>
+            <li class="sub-page"><a href="{% url 'photologue:gallery-list' %}">Monkies</a></li>
+          </ul>
+        </li>
+        </ul>
+        <div id='gif-container'><img id='nyan-cat-gif' src="{% static 'images/man-on-cat.gif' %}" /></div>
+      </div><!-- /.navbar-collapse -->
+      <section id='nyan-cat'>
+        <div id="rainbow-container">
+          <img id='rainbow' src="{% static 'images/rainbow.gif' %}">
+          <img id='rainbow' src="{% static 'images/rainbow.gif' %}">
+          <img id='rainbow' src="{% static 'images/rainbow.gif' %}">
+          <img id='rainbow' src="{% static 'images/rainbow.gif' %}">
+          <img id='rainbow' src="{% static 'images/rainbow.gif' %}">
+          <img id='rainbow' src="{% static 'images/rainbow.gif' %}">
+          <img id='rainbow' src="{% static 'images/rainbow.gif' %}">
+          <img id='rainbow' src="{% static 'images/rainbow.gif' %}">
+          <img id='rainbow' src="{% static 'images/rainbow.gif' %}">
+          <img id='rainbow' src="{% static 'images/rainbow.gif' %}">
+          <img id='rainbow' src="{% static 'images/rainbow.gif' %}">
+          <img id='rainbow' src="{% static 'images/rainbow.gif' %}">
+          <img id='rainbow' src="{% static 'images/rainbow.gif' %}">
+          <img id='rainbow' src="{% static 'images/rainbow.gif' %}">
+        </div>
+        <!-- <div><img id='nyan-cat-gif' src="{% static 'images/nyangif.gif' %}" /></div> -->
+      </section>
+    </nav>
+      <div class="container">
+        {% if user.is_authenticated %}
+          <p id='welcome-user'>Welcome {{ user.username }}</p>
+        {% else %}
+          <p id='welcome-user' style='font-size:3vw;'>Django._James( )</p>
+        {% endif %}
+        {% block content %}{% endblock %}
+        {% block he-man %}{% endblock %}
+      </div>
+      <section id="he-man">
+        <embed width="800" height="600" src="/static/swf/hey.swf"></embed>
+      </section>
+      <script src="/static/js/jquery.js"></script>
+      <script src="/static/js/bootstrap.min.js"></script>
+      <script src="/static/js/project.js"></script>
+      <script src="https://cdn.rawgit.com/namuol/cheet.js/master/cheet.min.js"></script>
+      <script src="/static/js/he-man.js"></script>
+    </body>
+</html>

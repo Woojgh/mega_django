@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+  <div class="user-info">
+    {% for key,value in user.items %}
+        <p>{{ key }} : {{ value }}</p>
+    {% endfor %}
+  </div>
+{% endblock %}

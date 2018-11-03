@@ -1,0 +1,83 @@
+/* Some customisation for the Photologue demo site. */
+
+#admin-dropdown {
+    display: none;
+}
+
+#background {
+    top: 12%;
+    width: 100%;
+    position: fixed;
+    z-index: -999;
+}
+
+div.row img.thumbnail {
+    margin-bottom: 5px;
+    display: inline-block;
+}
+
+.page-header {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+td {
+    width: 100px;
+}
+
+a.btn.btn-default {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#he-man {
+    display: none;
+    text-align: center;
+}
+
+.navbar.navbar-default {
+    background-color: #044171;
+    z-index: 0;
+}
+
+.navbar-title {
+    color: papayawhip;
+    float: left;
+    height: 50px;
+    padding: 15px 15px;
+    font-size: 18px;
+    line-height: 20px;
+}
+
+#nyan-cat {
+    height: 64px;
+}
+
+#nyan-cat-gif {
+    position: fixed;
+    width: 11em;
+    left: 91%;
+    top: .115%;
+}
+
+#rainbow-container {
+    position: fixed;
+    display: inline;
+    top: 0%;
+    z-index: -1;
+}
+#rainbow {
+    margin-top: 2em;
+    margin-right: -4px;
+    width: 8em;
+}
+#welcome-user {
+    background-color: rgba(32, 32, 32, 0.39);
+    border-radius: 5px;
+    color: papayawhip;
+    position: relative;
+    top: -2.1em;
+    left: 49vw;
+    width: 34%;
+    font-size: 3em;
+}
