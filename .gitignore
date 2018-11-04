@@ -95,12 +95,14 @@ wheels/
 *.egg
 MANIFEST
 
-static/facebook
-static/sortedm2m
-static/django_extensions
-static/images
-static/admin
-static/rest_framework
+/static/facebook
+/static/sortedm2m
+/static/django_extensions
+/static/images
+/static/admin
+/static/rest_framework
+.txtmars
+temp/
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
