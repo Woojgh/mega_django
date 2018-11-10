@@ -30,14 +30,22 @@
         <a class="navbar-title" href="/">Django_James</a>
       </div>
       <div id="greenTab" class="globalTab">
-  <svg height="20px" width="100px">
-    <p>Salty Bets</p>
+        <svg height="20px" width="100px">
+        <p>Videos</p>
     <!-- <line x1="12" y1="10" x2="88" y2="10" style="stroke:#333;stroke-width:5" /> -->
   </svg>
 </div>
-<div id="greenBody" class="globalBody"><script src= "https://player.twitch.tv/js/embed/v1.js"></script>
+<div id="greenBody" class="globalBody">
+  <button id="video-change-button">X</button>
+<div id="workaholics" class="worka">
+  <video controls>
+    <source src="/static/mkv/1.mkv">
+  </video>
+</div>
+<div id="salty-bets" class="salty">    
+<script src= "https://player.twitch.tv/js/embed/v1.js"></script>
 <div id="<player div ID>"></div>
-<script type="text/javascript">
+<script id="" type="text/javascript">
   var options = {
     width: '620',
     height: '378',
@@ -48,7 +56,9 @@
   var player = new Twitch.Player("<player div ID>", options);
   player.setVolume(0.5);
   player.pause()
-</script></div>
+</script>
+  </div>
+</div>
   
 <div id="yellowTab" class="globalTab">
   <svg height="20px" width="100px">
@@ -57,14 +67,71 @@
   </svg>
 </div>
 <div id="yellowBody" class="globalBody">
+  <audio controls>
+  <source src='/static/mp3/02.mp3' type="audio/mpeg">
+  <source src='/static/mp3/03.mp3' type="audio/mpeg">
+  <source src='/static/mp3/04.mp3' type="audio/mpeg">
+</audio>
    {% if user.discord_active %}
-    {% for key,value in disord_profile.items %}
+   <!-- {% for key,value in discord_user.items %}
+      <p>{{ key }} : {{ value }}</p>
+    {% endfor %} -->
+    {% for key,value in temp.items %}
       <p>{{ key }} : {{ value }}</p>
     {% endfor %}
   {% else %}
     <P><a href="https://localhost:8000/discord">Sign in to Discord</P></P>
   {% endif %}
+  <p><a href="https://discordapp.com/api/oauth2/authorize?client_id=507528707519545348&redirect_uri=https%3A%2F%2Flocalhost%3A8000&response_type=code&scope=identify%20email%20connections%20guilds">Discord Connect</a></p>
 </div>
+<div id="brownTab" class="globalTab">
+  <svg height="20px" width="100px">
+    <p>Music</p>
+    <!-- <line x1="12" y1="10" x2="88" y2="10" style="stroke:#333;stroke-width:5" /> -->
+  </svg>
+</div>
+<div id="brownBody" class="globalBody">
+  <div id="app-cover">
+      <div id="player">
+        <div id="player-track">
+          <div id="album-name"></div>
+          <div id="track-name"></div>
+          <div id="track-time">
+            <div id="current-time"></div>
+            <div id="track-length"></div>
+          </div>
+          <div id="s-area">
+            <div id="ins-time"></div>
+            <div id="s-hover"></div>
+            <div id="seek-bar"></div>
+          </div>
+        </div>
+        <div id="player-content">
+          <div id="album-art">
+            <img src="{% static 'images/DoneWithDatShit.JPG' %}" class="active" id="_1">
+            <div id="buffer-box">Buffering ...</div>
+          </div>
+          <div id="player-controls">
+            <div class="control">
+              <div class="button" id="play-previous">
+                <i class="fas fa-backward"></i>
+              </div>
+            </div>
+            <div class="control">
+              <div class="button" id="play-pause-button">
+                <i class="fas fa-play"></i>
+              </div>
+            </div>
+            <div class="control">
+              <div class="button" id="play-next">
+                <i class="fas fa-forward"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav">
@@ -145,11 +212,30 @@
         {% if user.is_authenticated %}
           <p id='welcome-user'>Welcome {{ user.username }}</p>
         {% else %}
-          <p id='welcome-user' style='font-size:3vw;'>Django._James( )</p>
+          <p id='welcome-user' style='font-size:3vw;'>Welcome Citizen</p>
         {% endif %}
         {% block content %}{% endblock %}
         {% block he-man %}{% endblock %}
       </div>
+<!--       <section id="mini-webs">
+        <div class="new-window">
+          <iframe src="https://www.google.com" name="mini-google"></iframe>
+          <p>
+            <a href="https://www.google.com" target="myFrame">Google</a>
+          </p>
+          <script>
+// When the user clicks on <div>, open the popup
+            function myFunction() {
+               var popup = document.getElementById("myPopup");
+                popup.classList.toggle("show");
+            }
+          </script>
+          <div class="popup" onclick="myFunction()">Click me!
+              <span class="popuptext" id="myPopup">Popup text...</span>
+                </div>
+          
+        </div>
+      </section> -->
       <section id="he-man">
         <embed width="800" height="600" src="/static/swf/hey.swf"></embed>
       </section>
@@ -158,6 +244,7 @@
       <script src="/static/js/project.js"></script>
       <script src="https://cdn.rawgit.com/namuol/cheet.js/master/cheet.min.js"></script>
       <script src="/static/js/he-man.js"></script>
+      <script src="/static/js/music.js"></script>
       <script src="/static/js/pull_tab.js"></script>
     </body>
 </html>

@@ -37,7 +37,7 @@ a.btn.btn-default {
 
 .navbar.navbar-default {
     background-color: #044171;
-    z-index: 0;
+    z-index: 9999999;
 }
 
 .navbar-title {
@@ -47,6 +47,11 @@ a.btn.btn-default {
     padding: 15px 15px;
     font-size: 18px;
     line-height: 20px;
+    z-index: 9999999;
+}
+
+nav {
+  z-index: 9999999999;
 }
 
 #nyan-cat {
@@ -80,6 +85,7 @@ a.btn.btn-default {
     left: 49vw;
     width: 34%;
     font-size: 3em;
+    z-index: 99999999999;
 }
 * { margin: 0px;   padding: 0px; }
         
@@ -93,7 +99,7 @@ body { background: #ABA554; }
   position: fixed;
   left: 0px;
   bottom: 0px;   
-  z-index: 666666;
+  z-index: 999999999999;
   border-top: 1px solid #333; }
                    
 .globalTab { height: 140px;
@@ -136,20 +142,391 @@ body { background: #ABA554; }
               text-shadow: -1px -1px 1px #666,
                             2px 2px 4px #333; }
                                            
-#greenTab { background-image: linear-gradient(to bottom, #9DC754 0%, #5B8A3B 30%);
-          left: -100px; }
+#greenTab { color: papayawhip; background-image: linear-gradient(to bottom, #3aa71f 0%, #3c671f 30%);
+          left: -90px; z-index: 9999;}
           
 #greenBody { background-image: linear-gradient(to  bottom, #5B8A3B 0%, #285708 100%);
-           color: #9C6; } 
+           color: #9C6;  z-index: 9999;} 
           
-#yellowTab { background-image: linear-gradient(to bottom, #C7C352 0%, #8A873E 30%);
-          left: -90px; top: 322px;}
+#yellowTab { background-image: linear-gradient(to bottom, #3e558a 0%, #162231 30%);
+          color: papayawhip; left: -90px; top: 52%;  z-index: 9998;}
 
-#yellowBody { background-image: linear-gradient(to bottom, #8A873E 0%, #57540B 100%);
-           color: #CC6; font-size:20px; line-height: 38px;}
+#yellowBody { background-image: linear-gradient(to bottom, #3e558a 0%, #162231 100%);
+    color: #e0e5ec;
+    font-size: 20px;
+    line-height: 38px;
+    top: 52%;
+    height: 13.2em;
+     z-index: 9998;}
           
-#brownTab { background-image: linear-gradient(to bottom, #C7A052 0%, #8A6E3E 30%);
-            left: 43%; }
+#brownTab { color:papayawhip; background-image: linear-gradient(to bottom, #b12121 0%, #821616 30%);
+            left: -90px; top: 80%;  z-index: 997;}
             
-#brownBody { background-image: linear-gradient(to bottom, #8A6E3E 0%, #573B0B 100%);
-             color: #C96; }
+#brownBody { background-image: url("/static/images/DoneWithDatShit.JPG");
+             background-repeat: no-repeat;
+             background-size: cover;
+             background-position: center;
+             color: #C96; top: 80%; height: 2.61em;  z-index: 9996;}
+
+*:focus
+{
+    outline: none;
+}
+
+
+#app-cover
+{
+    position: absolute;
+    top: 50%;
+    right: 0;
+    left: 0;
+    width: 430px;
+    height: 100px;
+    margin: -4px auto;
+}
+
+#bg-artwork
+{
+    position: fixed;
+    top: -30px;
+    right: -30px;
+    bottom: -30px;
+    left: -30px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%;
+}
+
+/*#bg-layer
+{
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0.51;
+}*/
+
+
+
+
+#video-change-button {
+  width: .7em;
+  height: 1em;
+  background-color: black;
+  z-index: 9999999999999999;
+  position: fixed;
+  top: 12.1%;
+  left: -90px;
+  line-height: 10px;
+}
+
+.new-window {
+  background-color: #00000087; 
+  border: 2px dotted black;
+  border-radius: 2px;
+  height:250px;
+  left: 50%;
+  position: fixed;
+  top: 50%;
+  width:400px;
+}
+
+.worka {
+  display: none;
+}
+
+.salty {
+
+}
+
+#player
+{
+    position: relative;
+    height: 100%;
+    z-index: 1;
+}
+
+#player-track
+{
+    position: absolute;
+    top: -55%;
+    right: 15px;
+    left: 15px;
+    padding: 13px 22px 10px 184px;
+    background-color: papayawhip;
+    border-radius: 15px 15px 0 0;
+    transition: 0.3s ease top;
+    z-index: 2;
+}
+
+.active {
+    top: -55%;
+}
+
+#album-name
+{
+    color: #54576f;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+#track-name
+{
+    color: black;
+    font-size: 13px;
+    margin: 2px 0 13px 0;
+}
+
+#track-time
+{
+    height: 12px;
+    margin-bottom: 3px;
+    overflow: hidden;
+}
+
+#current-time
+{
+    float: left;
+}
+
+#track-length
+{
+    float: right;
+}
+
+#current-time, #track-length
+{
+    color: transparent;
+    font-size: 11px;
+    background-color: #ffe8ee;
+    border-radius: 10px;
+    transition: 0.3s ease all;
+}
+
+#track-time.active #current-time, #track-time.active #track-length
+{
+    color: #f86d92;
+    background-color: transparent;
+}
+
+#s-area, #seek-bar
+{
+    position: relative;
+    height: 4px;
+    border-radius: 4px;
+}
+
+#s-area
+{
+    background-color:black;
+    cursor: pointer;
+}
+
+#ins-time
+{
+    position: absolute;
+    top: -29px;
+    color: blue;
+    font-size: 12px;
+    white-space: pre;
+    padding: 5px 6px;
+    border-radius: 4px;
+  display:none;
+}
+
+#s-hover
+{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0.2;
+    z-index: 2;
+}
+
+#ins-time, #s-hover
+{
+    background-color: white;
+}
+
+#seek-bar
+{
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    background-color: #fd6d94;
+    transition: 0.2s ease width;
+    z-index: 1;
+}
+
+#player-content
+{
+    position: relative;
+    height: 100%;
+    background-color: #b12121;
+    box-shadow: 0 30px 80px #656565;
+    border-radius: 3px;
+    z-index: 2;
+}
+
+#album-art
+{
+    position: absolute;
+    top: -40px;
+    width: 115px;
+    height: 115px;
+    margin-left: 40px;
+    transform: rotateZ(0);
+    transition: 0.3s ease all;
+    /*box-shadow: 0 0 0 10px #fff;*/
+    /*border-radius: 50%;*/
+    overflow: hidden;
+}
+
+#album-art.active
+{
+    top: -60%;
+    box-shadow: 0 0 0 4px #fff7f7, 0 30px 50px -15px #afb7c1;
+}
+
+#album-art:before
+{
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    margin: -10px auto 0 auto;
+    background-color: #d6dee7;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 2px #fff;
+    z-index: 2;
+}
+
+#album-art img
+{
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: -1;
+}
+
+#album-art img.active
+{
+    opacity: 1;
+    z-index: 1;
+}
+
+#album-art.active img.active
+{
+    z-index: 1;
+    animation: rotateAlbumArt 3s linear 0s infinite forwards;
+}
+
+@keyframes rotateAlbumArt
+{
+    0%{ transform: rotateZ(0); }
+    100%{ transform: rotateZ(360deg); }
+}
+
+#buffer-box
+{
+    position: absolute;
+    top: 50%;
+    right: 0;
+    left: 0;
+    height: 13px;
+    color: #1f1f1f;
+    font-size: 13px;
+    font-family: Helvetica;
+    text-align: center;
+    font-weight: bold;
+    line-height: 1;
+    padding: 6px;
+    margin: -12px auto 0 auto;
+    background-color: rgba(255, 255, 255, 0.19);
+    opacity: 0;
+    z-index: 2;
+}
+
+#album-art img, #buffer-box
+{
+    transition: 0.1s linear all;
+}
+
+#album-art.buffering img
+{
+    opacity: 0.25;
+}
+
+#album-art.buffering img.active
+{
+    opacity: 0.8;
+    filter: blur(2px);
+    -webkit-filter: blur(2px);
+}
+
+#album-art.buffering #buffer-box
+{
+    opacity: 1;
+}
+
+#player-controls
+{
+    width: 250px;
+    height: 100%;
+    margin: 0 5px 0 141px;
+    float: right;
+    overflow: hidden;
+}
+
+.control
+{
+    width: 33.333%;
+    float: left;
+    padding: 12px 0;
+}
+
+.button
+{
+    width: 26px;
+    height: 26px;
+    padding: 25px;
+    background-color: papayawhip;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.button i
+{
+    display: block;
+    color: #d6dee7;
+    font-size: 26px;
+    text-align: center;
+    line-height: 1;
+}
+
+.button, .button i
+{
+    transition: 0.2s ease all;
+}
+
+.button:hover
+{
+    background-color: #d6d6de;
+}
+
+.button:hover i
+{
+    color: #fff;
+}

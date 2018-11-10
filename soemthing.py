@@ -1,32 +1,63 @@
-import discord
+# Work with Python 3.6
+import random
+import asyncio
+import aiohttp
+import json
+from discord import Game
+from discord.ext.commands import Bot
 
-client = discord.Client()
+BOT_PREFIX = ("?", "!")
+TOKEN = "NTA3NTI4NzA3NTE5NTQ1MzQ4.Dr_OKQ.IrIxR5HIW8HAtw20wnhpMZyZ_sA" # Get at discordapp.com/developers/applications/me
 
-channel_id = 350751933327474688
-async def get_channel(channel_id):
-    return self._channels.get(channel_id)
-lst = []
-for server in client.servers:
-    for channel in server.channels:
-        lst.append(channel)
+client = Bot(command_prefix=BOT_PREFIX)
 
-@client.event
-async def on_member_join(member):
-    server = member.server
-    fmt = 'Welcome {0.mention} to {1.name}!'
-    await client.send_message(server, fmt.format(member, server))
+@client.command(name='8ball',
+                description="Answers a yes/no question.",
+                brief="Answers from the beyond.",
+                aliases=['eight_ball', 'eightball', '8-ball'],
+                pass_context=True)
+async def eight_ball(context):
+    possible_responses = [
+        'That is a resounding no',
+        'It is not looking likely',
+        'Too hard to tell',
+        'It is quite possible',
+        'Definitely',
+    ]
+    await client.say(random.choice(possible_responses) + ", " + context.message.author.mention)
+
+
+@client.command()
+async def square(number):
+    squared_value = int(number) * int(number)
+    await client.say(str(number) + " squared is " + str(squared_value))
+
 
 @client.event
 async def on_ready():
-    # import pdb; pdb.set_trace()
-    print('Logged in as')
-    print(client.user.name)
-    print(client.user.id)
-    print('------')
-
-monkey = discord.Client()
-# monkey.run('MzA0ODc1MzMzMTA5NDE1OTM2.Dr16DA.--DeKIr2d6pv9FH2o7fHrl0DIiw')
-# monkey.run('flippygonmad@gmail.com', '189645Jts!')
+    await client.change_presence(game=Game(name="with humans"))
+    print("Logged in as " + client.user.name)
 
 
-client.run("NTA3NTI4NzA3NTE5NTQ1MzQ4.Dr_OKQ.IrIxR5HIW8HAtw20wnhpMZyZ_sA")
+@client.command()
+async def bitcoin():
+    url = 'https://api.coindesk.com/v1/bpi/currentprice/BTC.json'
+    async with aiohttp.ClientSession() as session:  # Async HTTP request
+        raw_response = await session.get(url)
+        response = await raw_response.text()
+        response = json.loads(response)
+        await client.say("Bitcoin price is: $" + response['bpi']['USD']['rate'])
+
+
+async def list_servers():
+    await client.wait_until_ready()
+    while not client.is_closed:
+        print("Current servers:")
+        for server in client.servers:
+            print(server.name)
+        await asyncio.sleep(600)
+
+
+client.loop.create_task(list_servers())
+client.run(TOKEN)
+

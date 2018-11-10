@@ -64,7 +64,6 @@ class UserProfile(models.Model):
 @receiver(post_save, sender=User)
 def create_user_profile(sender, **kwargs):
     new_profile, created = UserProfile.objects.get_or_create(user=kwargs['instance'],)
-    import pdb; pdb.set_trace()
     # new_profile.user = kwargs['instance']
     # new_profile.save()
 

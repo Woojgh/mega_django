@@ -2,11 +2,14 @@
 {% load staticfiles %}
 
 {% block yellow %}
-  {% if user.discord_active %}
-    {% for key,value in disord_profile %}
+<!--     {% for (key,value) in temp.items %}
       <p>{{ key }} : {{ value }}</p>
-    {% endfor %}
-  {% else %}
-    <P><a href="https://localhost:8000/discord">Sign in to Discord</P></P>
+    {% endfor %} -->
+  <!-- {% if user.discord_active %} -->
+<!--     {% for key,value in disord_profile %}
+      <p>{{ key }} : {{ value }}</p>
+    {% endfor %} -->
+  <!-- {% else %} -->
+    <!-- <P><a href="https://localhost:8000/discord">Sign in to Discord</P></P> -->
   {% endif %}
 {% endblock %}

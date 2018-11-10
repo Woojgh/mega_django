@@ -46,15 +46,50 @@ class home_view(View):
   def get(self, request, *args, **kwargs):
     """Gets home view."""
     kwargs = self.request.GET
-    import pdb; pdb.set_trace()
     if 'code' in self.request.GET:
-      request.session['code'] = self.request.GET
-      request.session['is_logged_in'] = True
-      request.session.save()
-      temp = DiscordUser.objects.filter(user=request.user)[0]
-      discord_profile = dict({i:k for (i,k) in temp.__dict__.items()})
-      context = {'discord_profile': discord_profile}
-    context = {}
+        token_dict = exchange_code(request.GET['code'])
+        redirect_uri = request.build_absolute_uri('https://localhost:8000')
+        response = request.build_absolute_uri()
+        scope = (['identify', 'email', 'connections', 'guilds', 'guilds.join'])
+        try:
+            state = OAuth2Session.new_state(self)
+        except:
+            state = request.session['discord_bind_oauth_state']
+        oauth = oauth_session(request, state=state)
+        user_url = "https://discordapp.com/api/v6/users/@me"
+        querystring = {"":""}
+        payload = ""
+        headers = {
+            'cookie': "__cfduid" + request.COOKIES['csrftoken'],
+            'content-type': "application/json",
+            'authorization': "Bearer " + token_dict['access_token'],
+          }
+        discord_user = requests.request("GET", user_url, data=payload, headers=headers, params=querystring).json()
+        data = decompose_data(discord_user, token_dict)
+        bind_user(request, data)
+        self.session = OAuth2Session(os.environ.get('DISCORD_CLIENT_ID'),
+                        redirect_uri=redirect_uri,
+                        scope=scope,
+                        token=token_dict['access_token'],
+                        state=state)
+        request.user.discord_active = True
+        request.user.save()
+        request.session['code'] = self.request.GET
+        request.session['is_logged_in'] = True
+        request.session.save()
+        temp = DiscordUser.objects.filter(user=request.user)[0]
+        temp.access_token = token_dict['access_token'] 
+        temp.discriminator = discord_user['discriminator'] 
+        temp.username = discord_user['username'] 
+        temp.avatar = discord_user['avatar']
+        temp.email = discord_user['email']
+        temp.scope = scope
+        temp.save()
+        # discord_profile = temp.__dict__
+        temp = temp.__dict__
+        context = {'temp': temp, 'discord_user': discord_user}
+    else:
+        context = {}
     return render(request, 'home.html', context=context)
 
 
