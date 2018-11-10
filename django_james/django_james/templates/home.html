@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 
-{% block content %}
-  <div class="user-info">
-    {% for key,value in user.items %}
-        <p>{{ key }} : {{ value }}</p>
+{% block yellow %}
+  {% if user.discord_active %}
+    {% for key,value in disord_profile %}
+      <p>{{ key }} : {{ value }}</p>
     {% endfor %}
-  </div>
+  {% else %}
+    <P><a href="https://localhost:8000/discord">Sign in to Discord</P></P>
+  {% endif %}
 {% endblock %}

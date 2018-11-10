@@ -29,7 +29,42 @@
         </button>
         <a class="navbar-title" href="/">Django_James</a>
       </div>
-    
+      <div id="greenTab" class="globalTab">
+  <svg height="20px" width="100px">
+    <p>Salty Bets</p>
+    <!-- <line x1="12" y1="10" x2="88" y2="10" style="stroke:#333;stroke-width:5" /> -->
+  </svg>
+</div>
+<div id="greenBody" class="globalBody"><script src= "https://player.twitch.tv/js/embed/v1.js"></script>
+<div id="<player div ID>"></div>
+<script type="text/javascript">
+  var options = {
+    width: '620',
+    height: '378',
+    channel: "saltybet",
+    video: "<video ID>",
+    collection: "<collection ID>",
+  };
+  var player = new Twitch.Player("<player div ID>", options);
+  player.setVolume(0.5);
+  player.pause()
+</script></div>
+  
+<div id="yellowTab" class="globalTab">
+  <svg height="20px" width="100px">
+
+    <p>Discord</p>
+  </svg>
+</div>
+<div id="yellowBody" class="globalBody">
+   {% if user.discord_active %}
+    {% for key,value in disord_profile.items %}
+      <p>{{ key }} : {{ value }}</p>
+    {% endfor %}
+  {% else %}
+    <P><a href="https://localhost:8000/discord">Sign in to Discord</P></P>
+  {% endif %}
+</div>
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav">
@@ -71,7 +106,7 @@
               <li><a href="{% url 'logout' %}">Logout</a></li>
             {% endif %}
             {% if not user.is_authenticated %}
-              <li><a href="{% url 'django_registration_register' %}">Register</a></li>
+              <li><a href="/profile/register">Register</a></li>
               <li><a href="/admin/">Admin</a></li>
             {% endif %}
 
@@ -123,5 +158,6 @@
       <script src="/static/js/project.js"></script>
       <script src="https://cdn.rawgit.com/namuol/cheet.js/master/cheet.min.js"></script>
       <script src="/static/js/he-man.js"></script>
+      <script src="/static/js/pull_tab.js"></script>
     </body>
 </html>

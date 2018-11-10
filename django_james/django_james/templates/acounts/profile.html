@@ -2,9 +2,14 @@
 {% load staticfiles %}
 
 {% block content %}
-  <div class="user-info">
-    {% for key,value in user.items %}
-        <p>{{ key }} : {{ value }}</p>
-    {% endfor %}
-  </div>
+    <div class="user-discord-info">
+        {% for key,value in discord_user.items %}
+            <p>{{ key }} : {{ value }}</p>
+        {% endfor %}
+    </div>
+    <div class="user-profile">
+        {% for key,value in profile.__dict__ %}
+            <p>{{ key }} : {{ value }}</p>
+        {% endfor %}
+    </div>
 {% endblock %}

@@ -45,36 +45,15 @@ class home_view(View):
 
   def get(self, request, *args, **kwargs):
     """Gets home view."""
-
     kwargs = self.request.GET
+    import pdb; pdb.set_trace()
     if 'code' in self.request.GET:
-      import pdb; pdb.set_trace()
-    #   token_dict = exchange_code(kwargs['code'])
-    #   redirect_uri = request.build_absolute_uri('https://localhost:8000')
-    #   response = request.build_absolute_uri()
-    #   scope = (['identify', 'email', 'guilds.join'])
-    #   state = OAuth2Session.new_state(self)
-    #   oauth = oauth_session(request, state=state)
-    #   url = "https://discordapp.com/api/v6/users/@me"
-
-    #   querystring = {"":""}
-
-    #   payload = ""
-    #   headers = {
-    #     'cookie': "__cfduid=da049e651ba022e4131199974bb054c151541139885",
-    #     'content-type': "application/json",
-    #     'authorization': "Bearer " + token_dict['access_token'],
-    #   }
-    #   user = requests.request("GET", url, data=payload, headers=headers, params=querystring).json()
-    #   data = decompose_data(user, token_dict)
-    #   bind_user(request, data)
-    #   self.session = OAuth2Session(os.environ.get('DISCORD_CLIENT_ID'),
-    #                    redirect_uri=redirect_uri,
-    #                    scope=scope,
-    #                    token=token_dict['access_token'],
-    #                    state=state)
-    #   context = {'user': user}
-    # else:
+      request.session['code'] = self.request.GET
+      request.session['is_logged_in'] = True
+      request.session.save()
+      temp = DiscordUser.objects.filter(user=request.user)[0]
+      discord_profile = dict({i:k for (i,k) in temp.__dict__.items()})
+      context = {'discord_profile': discord_profile}
     context = {}
     return render(request, 'home.html', context=context)
 
@@ -133,5 +112,5 @@ def bind_user(request, data):
   uid = data.pop('uid')
   count = DiscordUser.objects.filter(uid=uid).update(user=request.user, **data)
   if count == 0:
-    import pdb; pdb.set_trace()
+    # import pdb; pdb.set_trace()
     DiscordUser.objects.create(uid=uid, user=request.user, **data)

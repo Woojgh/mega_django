@@ -52,13 +52,21 @@ class UserProfile(models.Model):
     def __str__(self):
         """."""
 
-        return '{} ({})'.format(self.user.email, self.account_type)
+        return '{}'.format(self.user.email)
 
     def save(self, *args, **kwargs):
         """Create a profile on Fatsecret in addition to locally."""
         if not self.id:
-            self.fat_oauth_token, self.fat_oauth_secret = fs_api.profile_create()
+            pass
         super(UserProfile, self).save(*args, **kwargs)
+
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, **kwargs):
+    new_profile, created = UserProfile.objects.get_or_create(user=kwargs['instance'],)
+    import pdb; pdb.set_trace()
+    # new_profile.user = kwargs['instance']
+    # new_profile.save()
 
 
 @receiver(post_save, sender=User)

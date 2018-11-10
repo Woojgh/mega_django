@@ -2,6 +2,12 @@
 # Created by https://www.gitignore.io/api/venv,python,images
 # Edit at https://www.gitignore.io/?templates=venv,python,images
 
+
+static
+static/
+/static/
+
+
 ### Images ###
 # JPEG
 *.jpg
